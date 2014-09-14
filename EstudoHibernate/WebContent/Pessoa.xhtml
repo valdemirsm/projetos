@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</head>
+<body>
+	<h:form id="formulario" prependId="false">
+		<h:inputText value="#{managedBeanPessoa.pessoa.nome}" />
+		<h:commandButton
+			action="#{managedBeanPessoa.salvar(managedBeanPessoa.pessoa)}"
+			value="Salvar" />
+		<h:dataTable var="pessoa" value="#{managedBeanPessoa.consultarPessoa}">
+			<h:column>
+				#{pessoa.nome}
+			</h:column>
+			<h:column>
+				<ul>
+					<ui:repeat var="end" value="#{pessoa.enderecos}">
+						#{end.endereco}
+					</ui:repeat>
+				</ul>
+			</h:column>
+		</h:dataTable>
+
+	</h:form>
+</body>
+</html>

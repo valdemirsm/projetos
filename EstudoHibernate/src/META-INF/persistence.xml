@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence           http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0" xmlns="http://java.sun.com/xml/ns/persistence">
+	<persistence-unit name="DevmediaPersistenceUnit">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+<!-- 		declaração dessas classes não é necessário se estivermos apenas um persistence-unit -->
+		<class>br.com.valdemir.estudohibernate.onetoone.Filho</class>
+		<class>br.com.valdemir.estudohibernate.onetoone.Pai</class>
+		<class>br.com.valdemir.estudohibernate.manytomany.Automovel</class>
+		<class>br.com.valdemir.estudohibernate.manytomany.Opcional</class>
+		<class>br.com.valdemir.estudohibernate.fkcomposta.Aluno</class>
+		<class>br.com.valdemir.estudohibernate.fkcomposta.Prova</class>
+		<class>br.com.valdemir.estudohibernate.fkcomposta.Imposto</class>
+		
+		<!-- Se eu estiver apenas um persistence unit não a necessidade de declarar as classes acima o java ee já faz
+		agora com o exclude d que adicionei abaixo, obriga adicionar as referencias das classes acima. 
+		Este exclude é bastante utilizado quando trabalhamos com mais de uma persitence unit, ai obriga cada um a especificar as suas classes,
+		agora se tivessemos mais de um persistence unit e não colocar esse exclude para cada um, cada um iria carregar todas as classes.-->
+<!-- 		<exclude-unlisted-classes>true</exclude-unlisted-classes> -->
+		<!-- nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn -->
+		
+		<properties>
+			<property name="hibernate.connection.username" value="root" />
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+			<property name="hibernate.connection.password" value="1234" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost/dbestudohibernate" />
+			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		</properties>
+<!-- 		<properties> -->
+<!-- 			<property name="hibernate.connection.username" value="postgres" /> -->
+<!-- 			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" /> -->
+<!-- 			<property name="hibernate.connection.password" value="123" /> -->
+<!-- 			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost/dbestudohibernate" /> -->
+<!-- 			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" /> -->
+<!-- 			<property name="hibernate.show_sql" value="true" /> -->
+<!-- 			<property name="hibernate.format_sql" value="true" /> -->
+<!-- 			<property name="hibernate.hbm2ddl.auto" value="update" /> -->
+<!-- 		</properties> -->
+
+		
+	</persistence-unit>
+	
+</persistence>

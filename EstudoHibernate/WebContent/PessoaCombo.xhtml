@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:p="http://primefaces.org/ui"
+xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="titulo">Sistema de Pedido de Vendas</ui:insert> </title>
+</h:head>
+<h:body>
+	<h:form id="formulario">
+		<p:panelGrid columns="2">
+			<p:selectOneMenu value="#{pessoaBean.pessoaSelecionada}">
+				<f:selectItems value="#{pessoaBean.pessoas}" var="pess" itemLabel="#{pess.nome}" itemValue="#{pess}"/>
+			</p:selectOneMenu>
+			
+			<p:commandButton value="Enviar" action="#{pessoaBean.enviar}" update="@form"/>
+		</p:panelGrid>
+	</h:form>
+</h:body>
+</html>

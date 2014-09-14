@@ -22,7 +22,7 @@ public class MainOneToOne {
 		
 		System.out.println(lista.size());
 		
-		
+		//teste
 		em.getTransaction().commit();
 		em.close();
 		emf.close();

@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" printOrder="Horizontal" pageWidth="200" pageHeight="10000" columnWidth="191" leftMargin="5" rightMargin="4" topMargin="1" bottomMargin="36">
+	<property name="ireport.zoom" value="1.3636363636363649"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="pParametro" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     dldeliveryitens."idp" AS dldeliveryitens_idp,
+     dldeliveryitens."id_deliveryitem" AS dldeliveryitens_id_deliveryitem,
+     dldeliveryitens."id_delivery" AS dldeliveryitens_id_delivery,
+     dldeliveryitens."id_produto" AS dldeliveryitens_id_produto,
+     dldeliveryitens."qtde" AS dldeliveryitens_qtde,
+     dldeliveryitens."vlr_unit" AS dldeliveryitens_vlr_unit,
+     dldeliveryitens."vlr_total" AS dldeliveryitens_vlr_total,
+     estproduto."idp" AS estproduto_idp,
+     estproduto."id_produto" AS estproduto_id_produto,
+     estproduto."vlr_unitario" AS estproduto_vlr_unitario,
+     estproduto."descricao" AS estproduto_descricao,
+     estproduto."tipo_produto" AS estproduto_tipo_produto,
+     estproduto."unidade_padrao" AS estproduto_unidade_padrao,
+     estproduto."saldo_estoque" AS estproduto_saldo_estoque,
+     dldelivery."idp" AS dldelivery_idp,
+     dldelivery."id_delivery" AS dldelivery_id_delivery,
+     dldelivery."id_cliente" AS dldelivery_id_cliente,
+     dldelivery."telefone" AS dldelivery_telefone,
+     dldelivery."situacao" AS dldelivery_situacao,
+     dldelivery."data_delivery" AS dldelivery_data_delivery,
+     dldelivery."vlr_bruto" AS dldelivery_vlr_bruto,
+     dldelivery."vlr_taxa_entrega" AS dldelivery_vlr_taxa_entrega,
+     dldelivery."vlr_desconto" AS dldelivery_vlr_desconto,
+     dldelivery."vlr_liquido" AS dldelivery_vlr_liquido,
+     dldelivery."vlr_recebido" AS dldelivery_vlr_recebido,
+     dldelivery."vlr_troco" AS dldelivery_vlr_troco
+FROM
+     "public"."dldeliveryitens" dldeliveryitens INNER JOIN "public"."estproduto" estproduto ON dldeliveryitens."id_produto" = estproduto."id_produto"
+     INNER JOIN "public"."dldelivery" dldelivery ON dldeliveryitens."id_delivery" = dldelivery."id_delivery"
+ORDER BY
+     dldeliveryitens."id_produto" ASC]]>
+	</queryString>
+	<field name="dldeliveryitens_idp" class="java.lang.Integer"/>
+	<field name="dldeliveryitens_id_deliveryitem" class="java.lang.Integer"/>
+	<field name="dldeliveryitens_id_delivery" class="java.lang.Integer"/>
+	<field name="dldeliveryitens_id_produto" class="java.lang.Integer"/>
+	<field name="dldeliveryitens_qtde" class="java.lang.Integer"/>
+	<field name="dldeliveryitens_vlr_unit" class="java.math.BigDecimal"/>
+	<field name="dldeliveryitens_vlr_total" class="java.math.BigDecimal"/>
+	<field name="estproduto_idp" class="java.lang.Integer"/>
+	<field name="estproduto_id_produto" class="java.lang.Integer"/>
+	<field name="estproduto_vlr_unitario" class="java.math.BigDecimal"/>
+	<field name="estproduto_descricao" class="java.lang.String"/>
+	<field name="estproduto_tipo_produto" class="java.lang.Integer"/>
+	<field name="estproduto_unidade_padrao" class="java.lang.String"/>
+	<field name="estproduto_saldo_estoque" class="java.math.BigDecimal"/>
+	<field name="dldelivery_idp" class="java.lang.Integer"/>
+	<field name="dldelivery_id_delivery" class="java.lang.Integer"/>
+	<field name="dldelivery_id_cliente" class="java.lang.Integer"/>
+	<field name="dldelivery_telefone" class="java.lang.String"/>
+	<field name="dldelivery_situacao" class="java.lang.Integer"/>
+	<field name="dldelivery_data_delivery" class="java.sql.Timestamp"/>
+	<field name="dldelivery_vlr_bruto" class="java.math.BigDecimal"/>
+	<field name="dldelivery_vlr_taxa_entrega" class="java.math.BigDecimal"/>
+	<field name="dldelivery_vlr_desconto" class="java.math.BigDecimal"/>
+	<field name="dldelivery_vlr_liquido" class="java.math.BigDecimal"/>
+	<field name="dldelivery_vlr_recebido" class="java.math.BigDecimal"/>
+	<field name="dldelivery_vlr_troco" class="java.math.BigDecimal"/>
+	<variable name="atnbalcaoitem_vlr_unt_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="atnbalcaoitem_vlr_unt_2" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="atnbalcaoitem_vlr_total_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="dldeliveryitens_vlr_total_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{dldeliveryitens_vlr_total}]]></variableExpression>
+	</variable>
+	<filterExpression><![CDATA[$F{dldeliveryitens_id_delivery}.equals( $P{pParametro} )]]></filterExpression>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="25" width="45" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[N. Delivery:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="36" width="45" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRODUTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="93" y="36" width="18" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QTD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="122" y="36" width="27" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VLR(R$) ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="36" width="32" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL(R$)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="46" width="189" height="1"/>
+			</line>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="128" y="25" width="62" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="84" y="25" width="44" height="10"/>
+				<textElement>
+					<font size="6" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Data impressão:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="149" y="36" width="8" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="36" width="8" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="44" y="25" width="30" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{dldeliveryitens_id_delivery}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="89" height="11"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{estproduto_descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="93" y="0" width="18" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{dldeliveryitens_qtde}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="122" y="0" width="27" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dldeliveryitens_vlr_unit}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="158" y="0" width="32" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dldeliveryitens_vlr_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="14" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="18" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="244" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="48" width="66" height="10"/>
+				<textElement>
+					<font size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Valor Recebido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="58" width="66" height="10"/>
+				<textElement>
+					<font size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Valor Troco:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="1" width="190" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="4" width="66" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sub Total:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="137" y="128" width="50" height="10"/>
+				<textElement>
+					<font size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[DKS Sistemas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="81" width="131" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Obrigado pela preferência!]]></text>
+			</staticText>
+			<elementGroup/>
+			<elementGroup/>
+			<staticText>
+				<reportElement x="0" y="211" width="189" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[********NÃO É DOCUMENTO FISCAL********]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="74" y="165" width="113" height="42"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[A. GALVANI SORVETES EXPRESSO
+AV MARECHAL RONDON Nº 1026 A CENTRO - RONDONOPOLIS - MT
+(66) 3423 -3149]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="92" width="131" height="26"/>
+				<textElement>
+					<font size="6" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[PROCON-RONDONOPOLIS-MT
+AV PONCE DE ARRUDA, 1616/1617
+TEL 3411 5295/5296/5296]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="74" y="150" width="113" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[TOCA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="224" width="189" height="19"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  ]]></text>
+			</staticText>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="90" y="4" width="100" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{dldeliveryitens_vlr_total_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="90" y="48" width="100" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dldelivery_vlr_recebido}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="90" y="58" width="100" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dldelivery_vlr_troco}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="14" width="66" height="10"/>
+				<textElement>
+					<font size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Desconto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="24" width="66" height="10"/>
+				<textElement>
+					<font size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Acrescimo:]]></text>
+			</staticText>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="90" y="14" width="100" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dldelivery_vlr_desconto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="90" y="24" width="100" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dldelivery_vlr_taxa_entrega}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="34" width="66" height="14"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="90" y="34" width="100" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dldelivery_vlr_liquido}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+	version="2.0">
+	<managed-bean>
+		<managed-bean-name>produtoBean</managed-bean-name>
+		<managed-bean-class>sismesa.web.ProdutoBean</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>mesaBean</managed-bean-name>
+		<managed-bean-class>sismesa.web.MesaBean</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+
+	<converter>
+		<converter-id>converteProduto</converter-id>
+		<converter-class>sismesa.produto.ConverteProduto</converter-class>
+	</converter>
+
+
+</faces-config>

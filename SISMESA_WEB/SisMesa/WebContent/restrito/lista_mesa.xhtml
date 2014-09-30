@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/interna.xhtml">
+	<ui:define name="titulo">Listagem de Mesas</ui:define>
+	<ui:define name="corpo">
+		<h:form style="width: 100%" id="lista_de_mesa">
+			<p:messages id="messages" />
+			<p:dataTable var="mesa" value="#{mesaBean.lista}" id="dtlistamesa">
+				<p:column>
+					<f:facet name="header">
+                    	Código
+            		</f:facet>
+					<h:outputText value="#{mesa.idmesa}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+                    	Descrição
+            		</f:facet>
+					<h:outputText value="#{mesa.descricao}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+                    	Situacao
+            		</f:facet>
+					<h:outputText value="#{mesa.situacao}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+                    	Produto
+            		</f:facet>
+					<h:outputText value="#{mesa.produto.nome}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+                    	Data
+            		</f:facet>
+					<h:outputText value="#{mesa.data}">
+						<f:convertDateTime locale="pt_BR" />
+					</h:outputText>
+				</p:column>
+				<p:column style="text-align:right;">
+					<f:facet name="header">
+                    	Qtde
+            		</f:facet>
+					<h:outputText value="#{mesa.qtde}" />
+				</p:column>
+				<p:column style="text-align:right;">
+					<f:facet name="header">
+                    	Valor Unit.
+            		</f:facet>
+					<h:outputText value="#{mesa.vlr_unit}">
+						<f:convertNumber minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				<p:column style="text-align:right;">
+					<f:facet name="header">
+                    	Valor Total
+            		</f:facet>
+					<h:outputText value="#{mesa.vlr_total}">
+						<f:convertNumber minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+
+				<p:column style="width: 1px">
+					<p:commandLink action="#{mesaBean.novo}"
+						oncomplete="dlgNovo.show()" update=":modalNovo" id="btnNovo">
+						<h:graphicImage library="imagens" name="new_con.gif" />
+					</p:commandLink>
+					<p:tooltip for="btnNovo"
+						value="Permite cadastrar uma nova mesa com seu respectivos produtos"
+						showEffect="slide" hideEffect="slide" />
+				</p:column>
+
+				<p:column style="width: 1px">
+					<p:commandLink action="#{mesaBean.editar}" oncomplete="dlg2.show()"
+						update=":modalDialog" id="btnEditar">
+						<h:graphicImage library="imagens" name="editar16.png" />
+						<f:setPropertyActionListener target="#{mesaBean.selecionada}"
+							value="#{mesa}" />
+					</p:commandLink>
+					<p:tooltip for="btnEditar"
+						value="Permite fazer alteração do registro selecionado"
+						showEffect="slide" hideEffect="slide" />
+				</p:column>
+
+				<p:column style="width: 1px">
+					<p:commandLink oncomplete="confirmation.show()" id="btnExcluir"
+						update=":confirmDlg">
+						<h:graphicImage library="imagens" name="delet.png" />
+						<f:setPropertyActionListener target="#{mesaBean.selecionada}"
+							value="#{mesa}" />
+					</p:commandLink>
+					<p:tooltip for="btnExcluir"
+						value="Permite fazer a exclusão do registro selecionado"
+						showEffect="slide" hideEffect="slide" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+
+
+		<!-- Tela Dialog de novos dados da mesa -->
+		<p:dialog id="modalNovo" header="Novo lançamento" widgetVar="dlgNovo"
+			modal="true" height="200" showEffect="fade" width="550"
+			appendToBody="true">
+			<p:panel id="panelNovo" style="border:1;">
+				<h:form id="formNovo">
+
+
+					<h:inputHidden value="#{mesaBean.selecionada.idmesa}" />
+					<h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="2"
+						border="0">
+						<h:outputText value="Mesa: " />
+						<p:selectOneMenu value="#{mesaBean.selecionada.descricao}"
+							effect="fade" style="width: 130px" id="mesa" label="Mesa">
+							<f:selectItem itemLabel="" />
+							<f:selectItem itemLabel="Mesa 01" itemValue="Mesa 01" />
+							<f:selectItem itemLabel="Mesa 02" itemValue="Mesa 02" />
+							<f:selectItem itemLabel="Mesa 03" itemValue="Mesa 03" />
+							<f:selectItem itemLabel="Mesa 04" itemValue="Mesa 04" />
+							<f:selectItem itemLabel="Mesa 05" itemValue="Mesa 05" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Produto: " />
+
+						<p:panel id="panelProduto" style="border:0;">
+							<p:selectOneMenu value="#{mesaBean.selecionada.produto}"
+								effect="fade" converter="converteProduto" id="prod"
+								label="Produto" style="width: 130px">
+								<f:selectItems value="#{produtoBean.lista}" var="p"
+									itemLabel="#{p.nome}" itemValue="#{p}" />
+							</p:selectOneMenu>
+						</p:panel>
+
+						<h:outputLabel value="Quatidade: " />
+						<p:inputText id="qtde" value="#{mesaBean.selecionada.qtde}"
+							size="6" style="width: 122px;" label="Qtde">
+						</p:inputText>
+
+						<h:outputLabel value="Valor Unitário: " />
+						<p:panel id="panelVlrUnit" style="border:0;">
+							<p:focus context="panelVlrUnit" />
+							<p:inputText id="vlr_unit"
+								value="#{mesaBean.selecionada.vlr_unit}" size="6"
+								style="width: 122px; text-align: right" label="Valor Unitário">
+
+								<f:convertNumber minFractionDigits="2" />
+								<p:ajax update=":formNovo" event="change" process="@form"
+									listener="#{mesaBean.mesaValueChangeListener}" />
+							</p:inputText>
+						</p:panel>
+
+						<h:outputLabel value="Valor Total: " />
+						<p:inputText id="vlr_total"
+							value="#{mesaBean.selecionada.vlr_total}" size="6"
+							style="width: 122px; text-align: right" label="Valor Total"
+							disabled="true">
+							<f:convertNumber minFractionDigits="2" />
+						</p:inputText>
+
+
+
+						<p:commandButton value="Salvar" action="#{mesaBean.salvar}"
+							style="width: 90px" update=":lista_de_mesa, :barChartt">
+
+						</p:commandButton>
+
+					</h:panelGrid>
+
+				</h:form>
+
+			</p:panel>
+		</p:dialog>
+		<!-- ************************************** -->
+
+		<!-- Tela Dialog de edicao dos dados da mesa -->
+		<p:dialog id="modalDialog" header="Alteração" widgetVar="dlg2"
+			modal="true" height="200" showEffect="fade" width="600"
+			appendToBody="true" >
+			<p:panel id="panelEdicao" style="border:1;">
+				<h:form id="formEditar">
+
+					<h:inputHidden value="#{mesaBean.selecionada.idmesa}" />
+					<h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="2"
+						border="0">
+						<h:outputText value="Mesa: " />
+						<p:selectOneMenu value="#{mesaBean.selecionada.descricao}"
+							effect="fade" style="width: 130px">
+							<f:selectItem itemLabel="" />
+							<f:selectItem itemLabel="Mesa 01" itemValue="Mesa 01" />
+							<f:selectItem itemLabel="Mesa 02" itemValue="Mesa 02" />
+							<f:selectItem itemLabel="Mesa 03" itemValue="Mesa 03" />
+							<f:selectItem itemLabel="Mesa 04" itemValue="Mesa 04" />
+							<f:selectItem itemLabel="Mesa 05" itemValue="Mesa 05" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Produto: " />
+						<p:panel id="panelProduto2" style="border:0;">
+							<p:selectOneMenu value="#{mesaBean.selecionada.produto}"
+								effect="fade" converter="converteProduto" style="width:130px">
+								<f:selectItems value="#{produtoBean.lista}" var="p"
+									itemLabel="#{p.nome}" itemValue="#{p}" />
+							</p:selectOneMenu>
+						</p:panel>
+
+						<h:outputLabel value="Quatidade: " />
+						<p:inputText id="qtde" value="#{mesaBean.selecionada.qtde}"
+							size="6" style="width: 122px">
+						</p:inputText>
+
+						<h:outputLabel value="Valor Unitário: " />
+						<p:panel id="panelVlrUnit2" style="border:0;">
+							<p:focus context="panelVlrUnit2" />
+							<p:inputText id="vlr_unit"
+								value="#{mesaBean.selecionada.vlr_unit}" size="6"
+								style="width: 122px; text-align: right">
+								<f:convertNumber minFractionDigits="2" />
+								<p:ajax update=":formEditar" event="change" process="@form"
+									listener="#{mesaBean.mesaValueChangeListener}" />
+							</p:inputText>
+						</p:panel>
+
+						<h:outputLabel value="Valor Total: " />
+						<p:inputText id="vlr_total"
+							value="#{mesaBean.selecionada.vlr_total}" size="6"
+							style="width: 122px; text-align: right" disabled="true">
+							<f:convertNumber minFractionDigits="2" />
+						</p:inputText>
+
+						<p:commandButton value="Salvar" action="#{mesaBean.salvar}"
+							style="width: 90px" oncomplete="dlg2.hide()"
+							update=":lista_de_mesa, :barChartt">
+
+						</p:commandButton>
+
+					</h:panelGrid>
+				</h:form>
+			</p:panel>
+		</p:dialog>
+		<!-- ************************************** -->
+
+		<!-- Dialog - Confirma exclusao -->
+
+		<p:confirmDialog id="confirmDlg"
+			message="Deseja excluir o item selecionado?"
+			header="Inicializando o processo de exclusão" severity="alert"
+			widgetVar="confirmation" appendToBody="true">
+			<h:form>
+				<p:commandButton action="#{mesaBean.excluir}" id="confirm"
+					value="Sim" oncomplete="confirmation.hide()"
+					update=":lista_de_mesa, :barChartt">
+				</p:commandButton>
+
+
+
+				<p:commandButton id="decline" value="Não"
+					onclick="confirmation.hide()" type="button" />
+			</h:form>
+		</p:confirmDialog>
+
+		<!-- ************************************** -->
+	</ui:define>
+</ui:composition>
+
+
+</html>

@@ -1,0 +1,15 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h2>Include page</h2>
+	<p>Include page blah blah lorem ipsum</p>
+	<p:dialog header="Mesa aberta" widgetVar="dlgMesa" modal="false"
+		height="160" showEffect="fade" width="550" appendToBody="true">
+
+		<li>nome: ${mesa.idmesa}+'gagaga', email ${mesa.descricao}</li>
+
+
+	</p:dialog>
+</ui:composition>

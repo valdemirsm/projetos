@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Login SisMesa</title>
+
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/style/login.css" />
+</h:head>
+
+<body>
+
+	<form action="#{request.contextPath}/j_spring_security_check"
+		method="post">
+		<div id="login-box">
+
+			<div id="login-box-interno">
+
+				<div id="login-box-label">Informe o Login para acesso ao
+					sistema!</div>
+
+				<div class="input-div" id="input-usuario">
+					<input type="text" value="Usuário ou Email" name="j_username" />
+				</div>
+
+				<div class="input-div" id="input-senha">
+					<input type="password" value="Senha" name="j_password" />
+				</div>
+
+				<div id="botoes">
+					<div id="btn">
+						<input id="botao" type="submit" value="Entrar" />
+					</div>
+					<div id="lembrar-senha">
+						<input type="checkbox" name="_spring_security_remember_me" />
+						Lembrar minha senha
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div id="esqueceu-senha">
+			<b>Esqueceu a senha?</b> Clique aqui para enviar por email.
+		</div>
+		<script>
+			document.getElementById("login").j_username.value = "#{SPRING_SECURITY_LAST_USERNAME}";
+		</script>
+	</form>
+</body>
+
+</html>

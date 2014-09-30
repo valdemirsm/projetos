@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/interna.xhtml">
+	<ui:define name="titulo">Cadastro de Mesas</ui:define>
+	<ui:define name="corpo">
+	<h:form>
+		<h:inputHidden value="#{mesaBean.selecionada.idmesa}" />
+		<h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5">
+			<h:outputText value="Mesa: " />
+			<p:selectOneMenu value="#{mesaBean.selecionada.descricao}"
+				effect="fade" style="width: 130px">
+				<f:selectItem itemLabel="" />
+				<f:selectItem itemLabel="Mesa 01" itemValue="Mesa 01" />
+				<f:selectItem itemLabel="Mesa 02" itemValue="Mesa 02" />
+				<f:selectItem itemLabel="Mesa 03" itemValue="Mesa 03" />
+				<f:selectItem itemLabel="Mesa 04" itemValue="Mesa 04" />
+				<f:selectItem itemLabel="Mesa 05" itemValue="Mesa 05" />
+			</p:selectOneMenu>
+	        
+	         <h:outputText value="Produto: " />
+	        <p:selectOneMenu value="#{mesaBean.selecionada.produto}" effect="fade" converter="converteProduto">
+	            <f:selectItems value="#{produtoBean.lista}" var="p" itemLabel="#{p.nome}" itemValue="#{p}"/>
+	        </p:selectOneMenu>
+
+			<h:outputLabel value="Quatidade: " />
+			<h:inputText id="qtde"
+				value="#{mesaBean.selecionada.qtde}" size="6" style="width: 130px; text-align: right">
+				<f:convertNumber minFractionDigits="2" />
+			</h:inputText>
+			
+			<h:outputLabel value="Valor Unitário: " />
+			<h:inputText id="vlr_unit"
+				value="#{mesaBean.selecionada.vlr_unit}" size="6" style="width: 130px; text-align: right">
+				<f:convertNumber minFractionDigits="2"/>
+			</h:inputText>
+			
+			<h:outputLabel value="Valor Total: " />
+			<h:inputText id="vlr_total"
+				value="#{mesaBean.selecionada.vlr_total}" size="6" style="width: 130px; text-align: right">
+				<f:convertNumber minFractionDigits="2" />
+			</h:inputText>
+
+
+
+			<h:commandButton value="Salvar" action="#{mesaBean.salvar}" style="width: 90px"/>
+			
+		</h:panelGrid>
+	</h:form>
+	</ui:define>
+</ui:composition>
+</html>

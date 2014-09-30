@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<!-- (1) -->
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title><ui:insert name="titulo">Financeiro Web</ui:insert></title>
+	<!-- (2) -->
+	<!-- <h:outputStylesheet library="css" name="estilo.css" /> -->
+	<h:outputStylesheet library="css" name="menu.css" />
+
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/style/prime.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/style/default.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/style/syntaxhighlighter/syntaxhighlighter.css" />
+
+</h:head>
+<h:body>
+	<div id="container">
+
+
+		<p:layout fullPage="true">
+			<p:layoutUnit position="north" size="80">
+				<div id="titulo">
+					<ui:insert name="titulo">Financeiro Web</ui:insert>
+				</div>
+				<div id="barra_menu">
+					<ui:insert name="barra_menu">
+						<ui:include src="/restrito/menu_sistema.xhtml" />
+					</ui:insert>
+				</div>
+			</p:layoutUnit>
+
+			<p:layoutUnit id="left" position="west" size="200" resizable="true"
+				minSize="200">
+				<p:accordionPanel>
+					<p:tab title="Cadastros">
+						<a href="../restrito/produto.xhtml">Cadastro de Produtos</a>
+						<br></br>
+						<a href="../restrito/mesa.xhtml">Cadastro de Mesas</a>
+						<br></br>
+						<a href="../restrito/produto.xhtml">Cadastro de Caixas</a>
+					</p:tab>
+					<p:tab title="Consultas">
+						<a href="../restrito/lista_produto.xhtml">Lista de Produtos</a>
+						<br></br>
+						<a href="../restrito/lista_mesa.xhtml">Lista de Mesas</a>
+						<br></br>
+						<a href="../restrito/comanda.xhtml">Comandas</a>
+					</p:tab>
+					<p:tab title="Relatórios">
+						<a href="#">Produtos</a>
+						<br></br>
+						<a href="#">Mesas abertas</a>
+						<br></br>
+						<a href="#">Comandas</a>
+					</p:tab>
+				</p:accordionPanel>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center" resizable="true" collapsible="true"
+				closable="true">
+				<div id="corpo">
+					<table border="0" width="100%">
+						<tr>
+							<td align="left"><ui:insert name="corpo" /></td>
+						</tr>
+					</table>
+				</div>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="east" size="350" resizable="true"
+				collapsible="true">
+				<h:panelGrid columns="1">
+					<p:barChart value="#{produtoBean.listaProdVend}"
+						legendPosition="ne" min="0" max="150"
+						style="width:332px;height:500px" yaxisLabel="Total Vendido"
+						xaxisLabel="Produtos" title="Produtos em destaque - Mais vendidos"
+						id="barChartt" animate="true" />
+				</h:panelGrid>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="south">
+				<div id="rodape">
+					<ui:insert name="rodape">
+						<ui:include src="/restrito/rodape.xhtml" />
+					</ui:insert>
+				</div>
+			</p:layoutUnit>
+		</p:layout>
+	</div>
+
+
+
+</h:body>
+</html>

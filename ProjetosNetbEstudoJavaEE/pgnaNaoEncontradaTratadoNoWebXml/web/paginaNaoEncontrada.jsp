@@ -1,0 +1,5 @@
+<%@ page isErrorPage="true" %> 
+
+<html>
+    <h1>404 - Página não encontrada.</h1><br/> 
+</html> 

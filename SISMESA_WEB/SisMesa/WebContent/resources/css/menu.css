@@ -1,0 +1,26 @@
+#nav {
+	float: left;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	background: #ccc;
+	border-bottom: 1px solid #999;
+}
+
+	
+#nav a {
+	float: left;
+	display: block;
+	padding: 6px 30px 6px 5px;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 90%;
+	color: #666;
+	background: #ccc url(../resources/imagens/nav_slant.gif) no-repeat top right;
+}
+	
+	
+#nav a:hover {
+	color: #000;
+}

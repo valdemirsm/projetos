@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/interna.xhtml">
+	<ui:define name="titulo">Cadastro de Produtos</ui:define>
+	<ui:define name="corpo">
+	<h:form>
+		<h:message />
+		<h:inputHidden value="#{produtoBean.selecionada.codigo}" />
+		<h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5">
+			<h:outputLabel value="Nome: " />
+			<h:inputText id="nome" value="#{produtoBean.selecionada.nome}"
+				required="true" maxlength="45" />
+
+			<h:outputLabel value="Valor Uni: " />
+			<h:inputText id="Valor_Uni"
+				value="#{produtoBean.selecionada.valor_unitario}" size="6">
+				<f:convertNumber minFractionDigits="2" />
+			</h:inputText>
+
+			<h:outputText value="Tipo: " />
+			<p:selectOneMenu value="#{produtoBean.selecionada.tipo}"
+				effect="fade" style="width: 155px">
+				<f:selectItem itemLabel="Produto" itemValue="1" />
+				<f:selectItem itemLabel="Insumo" itemValue="2" />
+			</p:selectOneMenu>
+
+			<h:outputText value="Unidade: " />
+			<p:selectOneMenu value="#{produtoBean.selecionada.un}" effect="fade" style="width: 72px">
+				<f:selectItem itemLabel="LT" itemValue="LT" />
+				<f:selectItem itemLabel="UN" itemValue="UN" />
+				<f:selectItem itemLabel="KG" itemValue="KG" />
+			</p:selectOneMenu>
+
+			<h:commandButton value="Salvar" action="#{produtoBean.salvar}">
+			</h:commandButton>
+		</h:panelGrid>
+	</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rel_filmes_faturados" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.464100000000001"/>
+	<property name="ireport.x" value="217"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT CAST(FATURA.DATA_RETIRADA AS DATE) AS DATA_RETIRADA,
+ITEM_FATURA.ID_FILME_ALUGADO AS ID_FILME_ALUGADO,
+FATURA.ID_FATURA AS ID_FATURA,
+ITEM_FATURA.SITUACAO AS SITUACAO,
+FILME.NOME AS FILME_NOME,
+CLIENTE.NOME AS CLIENTE_NOME,
+ITEM_FATURA.DATA_DEVOLUCAO AS DATA_DEVOLUCAO,
+ITEM_FATURA.PRECO_FILME AS PRECO_FILME FROM ITEM_FATURA, FATURA, FILME, CLIENTE
+WHERE ITEM_FATURA.ID_FATURA = FATURA.ID_FATURA AND FATURA.ID_CLIENTE = CLIENTE.ID_CLIENTE AND ITEM_FATURA.ID_FILME = FILME.ID_FILME
+GROUP BY CAST(FATURA.DATA_RETIRADA AS DATE), ITEM_FATURA.ID_FILME_ALUGADO]]>
+	</queryString>
+	<field name="DATA_RETIRADA" class="java.sql.Date"/>
+	<field name="ID_FILME_ALUGADO" class="java.lang.Integer"/>
+	<field name="ID_FATURA" class="java.lang.Integer"/>
+	<field name="SITUACAO" class="java.lang.Integer"/>
+	<field name="FILME_NOME" class="java.lang.String"/>
+	<field name="CLIENTE_NOME" class="java.lang.String"/>
+	<field name="DATA_DEVOLUCAO" class="java.sql.Timestamp"/>
+	<field name="PRECO_FILME" class="java.math.BigDecimal"/>
+	<variable name="PRECO_FILME_1" class="java.math.BigDecimal" resetType="Group" resetGroup="grp_data_retirada" calculation="Sum">
+		<variableExpression><![CDATA[$F{PRECO_FILME}]]></variableExpression>
+	</variable>
+	<group name="grp_data_retirada">
+		<groupExpression><![CDATA[$F{DATA_RETIRADA}]]></groupExpression>
+		<groupHeader>
+			<band height="16">
+				<staticText>
+					<reportElement x="0" y="0" width="89" height="14"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Data de Retirada:]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="89" y="0" width="100" height="14"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{DATA_RETIRADA}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="14" width="555" height="1"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="46">
+				<line>
+					<reportElement x="0" y="1" width="555" height="1"/>
+				</line>
+				<textField>
+					<reportElement x="455" y="2" width="100" height="15"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PRECO_FILME_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="5" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="545" height="31"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relação de filmes faturados]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement x="70" y="0" width="93" height="13"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome do filme]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="0" width="103" height="14"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome do cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="0" width="76" height="14"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de devolução]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="0" width="75" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Preço do filme]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="14" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="60" height="13"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID Fatura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="0" width="58" height="14"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Situação]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="70" y="0" width="93" height="13"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FILME_NOME}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="296" y="0" width="76" height="13"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DATA_DEVOLUCAO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="168" y="0" width="103" height="13"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CLIENTE_NOME}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="480" y="-1" width="75" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRECO_FILME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="60" height="13"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID_FATURA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="408" y="0" width="57" height="13"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SITUACAO}.toString()== "1" ? "Emprestado" :
+$F{SITUACAO}.toString() == "2" ? "Devolvido" : ""]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="16" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="17" splitType="Stretch"/>
+	</summary>
+</jasperReport>

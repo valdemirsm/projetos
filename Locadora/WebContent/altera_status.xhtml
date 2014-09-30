@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/style/prime.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/style/default.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/style/syntaxhighlighter/syntaxhighlighter.css" />
+</h:head>
+<body>
+	<p:layout fullPage="true">
+		<h:form>
+			<p:layoutUnit position="west" size="100">
+				<h:outputLink value="#{request.contextPath}/faces/cliente.xhtml">Cadastro de clientes</h:outputLink>
+				<br></br>
+				<br></br>
+				<h:outputLink
+					value="#{request.contextPath}/faces/consulta_cliente.xhtml">Consulta de clientes</h:outputLink>
+				<br></br>
+				<br></br>
+				<h:outputLink value="#{request.contextPath}/faces/filme.xhtml">Cadastro de filmes</h:outputLink>
+				<br></br>
+				<br></br>
+				<h:outputLink
+					value="#{request.contextPath}/faces/consulta_filme.xhtml">Consulta de filmes</h:outputLink>
+				<br></br>
+				<br></br>
+				<h:outputLink value="#{request.contextPath}/faces/fatura.xhtml">Empréstimo/Faturamento</h:outputLink>
+				<br></br>
+				<br></br>
+				<h:outputLink value="#{request.contextPath}/faces/devolucao.xhtml">Consulta/Devolução</h:outputLink>
+				<br></br>
+				<br></br>
+				<h:outputLink value="#{request.contextPath}/faces/rel_filmes_alugados.xhtml">Relatorio de filmes alugados</h:outputLink>
+			</p:layoutUnit>
+			<p:layoutUnit position="center">
+				<h:panelGrid columns="3" border="0" cellpadding="7"
+					style="background-color: #EAEAEA">
+					<f:facet name="header">  
+				        Altere a situação do filme  
+				    </f:facet>
+
+					<h:outputLabel value="Data de Pgto: *" />
+					<p:calendar value="#{itemFaturaBean.itemFatura.data_pagamento}"
+						id="data_pgto" showOn="button" pattern="dd/MM/yyyy"
+						readOnlyInputText="true" rendered="true">
+					</p:calendar>
+					<p:message id="defaultMessage1" for="data_pgto" display="grid" />
+
+
+					<h:outputText value="Basic Usage: " />
+					<p:selectOneMenu value="#{itemFaturaBean.itemFatura.situacao}">
+						<f:selectItem itemLabel="Emprestado" itemValue="1" />
+						<f:selectItem itemLabel="Devolvido" itemValue="2" />
+					</p:selectOneMenu>
+
+					<f:facet name="footer">
+						<p:commandButton value="Enviar"
+							actionListener="#{itemFaturaBean.altera_status}" ajax="false">
+							<f:attribute name="situaca_filme"
+								value="#{itemFaturaBean.itemFatura.situacao}" />
+						</p:commandButton>
+					</f:facet>
+				</h:panelGrid>
+			</p:layoutUnit>
+		</h:form>
+	</p:layout>
+</body>
+</html>

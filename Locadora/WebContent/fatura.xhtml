@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/style/prime.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/style/default.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/style/syntaxhighlighter/syntaxhighlighter.css" />
+</h:head>
+<body>
+	<p:layout fullPage="true">
+		<h:form>
+			<p:layoutUnit position="west" size="100">
+				<h:outputLink value="#{request.contextPath}/faces/cliente.xhtml">Cadastro de clientes</h:outputLink>
+				<br></br>
+				<br></br>
+				<h:outputLink
+					value="#{request.contextPath}/faces/consulta_cliente.xhtml">Consulta de clientes</h:outputLink>
+				<br></br>
+				<br></br>
+				<h:outputLink value="#{request.contextPath}/faces/filme.xhtml">Cadastro de filmes</h:outputLink>
+				<br></br>
+				<br></br>
+				<h:outputLink
+					value="#{request.contextPath}/faces/consulta_filme.xhtml">Consulta de filmes</h:outputLink>
+				<br></br>
+				<br></br>
+				<h:outputLink value="#{request.contextPath}/faces/fatura.xhtml">Empréstimo/Faturamento</h:outputLink>
+				<br></br>
+				<br></br>
+				<h:outputLink value="#{request.contextPath}/faces/devolucao.xhtml">Consulta/Devolução</h:outputLink>
+				<br></br>
+				<br></br>
+				<h:outputLink value="#{request.contextPath}/faces/rel_filmes_alugados.xhtml">Relatorio de filmes alugados</h:outputLink>
+			</p:layoutUnit>
+			<p:layoutUnit position="center">
+				<h:panelGrid columns="1">
+					<f:facet name="header">  
+		        Informe os dados para o faturamento
+		    </f:facet>
+					<h:outputLabel  value="Nome do cliente: *" />
+					<p:selectOneMenu value="#{faturaBean.fatura.id_cliente}">
+						<f:selectItems value="#{clienteBean.clientes}" var="clie"
+							itemLabel="#{clie.nome}" itemValue="#{clie.id_cliente}" />
+					</p:selectOneMenu>
+
+					<h:outputLabel value="Data de Pgto: *" />
+					<p:calendar value="#{faturaBean.fatura.data_pagamento}"
+						id="data_pgto" showOn="button" pattern="dd/MM/yyyy" readOnlyInputText="true" rendered="true">
+					</p:calendar>
+					<p:message id="defaultMessage1" for="data_pgto" display="grid"/>
+
+					<f:facet name="footer">
+						<p:commandButton value="Faturar"
+							actionListener="#{faturaBean.inserir}" ajax="false"
+							action="/item_fatura.xhtml"/>
+					</f:facet>
+				</h:panelGrid>
+			</p:layoutUnit>
+		</h:form>
+	</p:layout>
+</body>
+</html>

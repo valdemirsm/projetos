@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/style/prime.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/style/default.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/style/syntaxhighlighter/syntaxhighlighter.css" />
+</h:head>
+<body>
+	<p:layout fullPage="true">
+		<h:form prependId="false">
+			<p:layoutUnit position="west" size="100">
+				<h:outputLink value="#{request.contextPath}/faces/cliente.xhtml">Cadastro de clientes</h:outputLink>
+				<br></br>
+				<br></br>
+				<h:outputLink
+					value="#{request.contextPath}/faces/consulta_cliente.xhtml">Consulta de clientes</h:outputLink>
+				<br></br>
+				<br></br>
+				<h:outputLink value="#{request.contextPath}/faces/filme.xhtml">Cadastro de filmes</h:outputLink>
+				<br></br>
+				<br></br>
+				<h:outputLink
+					value="#{request.contextPath}/faces/consulta_filme.xhtml">Consulta de filmes</h:outputLink>
+				<br></br>
+				<br></br>
+				<h:outputLink value="#{request.contextPath}/faces/fatura.xhtml">Empréstimo/Faturamento</h:outputLink>
+				<br></br>
+				<br></br>
+				<h:outputLink value="#{request.contextPath}/faces/devolucao.xhtml">Consulta/Devolução</h:outputLink>
+				<br></br>
+				<br></br>
+				<h:outputLink value="#{request.contextPath}/faces/rel_filmes_alugados.xhtml">Relatorio de filmes alugados</h:outputLink>
+			</p:layoutUnit>
+			<p:layoutUnit position="center">
+				<p:dataTable id="basic" var="cli" value="#{clienteBean.clientes}"
+					paginator="true" rows="5"
+					rowsPerPageTemplate="5,10,15,20,25,30,35,40">
+					<f:facet name="header">  
+		            	Lista de Clientes  
+		        	</f:facet>
+
+					<p:column id="ColumID" sortBy="#{cli.id_cliente}"
+						filterMatchMode="contains" footerText="contains"
+						headerText="Model" filterBy="#{cli.id_cliente}">
+						<f:facet name="header">
+							ID
+						</f:facet>
+						<h:outputText value="#{cli.id_cliente}" />
+					</p:column>
+
+					<p:column id="ColumNome" sortBy="#{cli.nome}"
+						filterMatchMode="contains" footerText="contains"
+						headerText="Model" filterBy="#{cli.nome}">
+						<f:facet name="header">
+							Nome
+						</f:facet>
+						<h:outputText value="#{cli.nome}" />
+					</p:column>
+
+					<p:column id="ColumCPF" sortBy="#{cli.cpf}"
+						filterMatchMode="contains" footerText="contains"
+						headerText="Model" filterBy="#{cli.cpf}">
+						<f:facet name="header">
+							CPF
+						</f:facet>
+						<h:outputText value="#{cli.cpf}" />
+					</p:column>
+
+					<p:column id="ColumRG" sortBy="#{cli.rg}"
+						filterMatchMode="contains" footerText="contains"
+						headerText="Model" filterBy="#{cli.rg}">
+						<f:facet name="header">
+							RG
+						</f:facet>
+						<h:outputText value="#{cli.rg}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Opção" />
+						</f:facet>
+						<h:commandButton value="X" actionListener="#{clienteBean.remover}" action="consulta_cliente.xhtml" image="../icones/delet.png">
+							<f:attribute name="id_cli" value="#{cli.id_cliente}"/> 
+						</h:commandButton>
+						<h:commandButton value="A" actionListener="#{clienteBean.alterar}" image="../icones/edit.png"
+							action="cliente.xhtml">
+							<f:attribute name="id_cli" value="#{cli.id_cliente}" />
+							<f:attribute name="nome_cli" value="#{cli.nome}" />
+							<f:attribute name="cpf_cli" value="#{cli.cpf}" />
+							<f:attribute name="rg_cli" value="#{cli.rg}" />
+						</h:commandButton>
+
+					</p:column>
+
+				</p:dataTable>
+			</p:layoutUnit>
+		</h:form>
+	</p:layout>
+</body>
+</html>

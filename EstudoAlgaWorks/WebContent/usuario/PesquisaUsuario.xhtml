@@ -1,0 +1,67 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="titulo">Cadastro de usuário</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="formUsuario">
+			<h1>Pesquisa usuário</h1>
+			<p:messages autoUpdate="true"/>
+			<p:toolbar style="margin-top: 20px;">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisa"
+						action="#{pesquisaUsuarioBean.pesquisar}" update="@form"/>
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/usuario/CadastroUsuario" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid id="panel" columns="2"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="60"
+					value="#{pesquisaUsuarioBean.usuarioFilter.nome}" />
+			</p:panelGrid>
+
+			<p:dataTable value="#{pesquisaUsuarioBean.usuariosFiltrados}"
+				var="usuario" paginator="true" rows="8"
+				rowsPerPageTemplate="5, 10, 20" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom" style="margin-top: 2px;">
+				<p:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{usuario.nome}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">E-mail</f:facet>
+					<h:outputText value="#{usuario.email}" />
+				</p:column>
+
+				<p:column style="text-align: right; width: 80px">
+					<p:button id="btnEditar" icon="ui-icon-pencil"
+						title="Editar" outcome="/usuario/CadastroUsuario">
+						<f:param name="p_usuario" value="#{usuario.id}"/>
+					</p:button>
+					<p:commandButton id="btnExcluir"
+						oncomplete="confirmacaoExclusaoUsuarioDlg.show()"
+						icon="ui-icon-trash" title="Excluir" update=":formUsuario:dlgConfimaExclusao" process="@this">
+						<f:setPropertyActionListener target="#{pesquisaUsuarioBean.usuarioSelecionado}" value="#{usuario}"/>
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog id="dlgConfimaExclusao" widgetVar="confirmacaoExclusaoUsuarioDlg"
+				header="Confirmação de exclusão de usuário"
+				message="Deseja excluir o usuário #{pesquisaUsuarioBean.usuarioSelecionado.id} selecionado?">
+				<p:button value="Não"
+					onclick="confirmacaoExclusaoUsuarioDlg.hide(); return false;" />
+				<p:commandButton value="Sim"
+					oncomplete="confirmacaoExclusaoUsuarioDlg.hide()" action="#{pesquisaUsuarioBean.excluir}" process="@this" update="@form"/>
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

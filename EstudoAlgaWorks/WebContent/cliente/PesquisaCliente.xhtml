@@ -1,0 +1,57 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="titulo">Cadastro de cliente</ui:define>
+	
+	<ui:define name="corpo">
+		<h1>Pesquisa cliente</h1>
+		<p:toolbar style="margin-top: 20px;">
+			<p:toolbarGroup>
+				<p:commandButton value="Pesquisa"/>
+			</p:toolbarGroup>
+			<p:toolbarGroup align="right">
+				<p:button value="Novo" outcome="/cliente/CadastroCliente"/>
+			</p:toolbarGroup>
+		</p:toolbar>
+		
+		<p:panelGrid id="panel" columns="2" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+			<p:outputLabel value="CPF/CNPJ" for="cpfcnpj"/>
+			<p:inputText id="cpfcnpj"/>
+			
+			<p:outputLabel value="Nome" for="nome"/>
+			<p:inputText id="nome" size="60"/>
+		</p:panelGrid>
+		
+		<p:dataTable value="#{pesquisaClienteBean.clientesFiltrados}" var="cliente" paginator="true" rows="8" 
+			rowsPerPageTemplate="5, 10, 20" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+			<p:column>
+				<f:facet name="header">Nome</f:facet>
+				<h:outputText value="José da Silva"/>
+			</p:column>
+			
+			<p:column>
+				<f:facet name="header">Tipo</f:facet>
+				<h:outputText value="Jurídica"/>
+			</p:column>
+			
+			<p:column>
+				<f:facet name="header">CPF/CNPJ</f:facet>
+				<h:outputText value="940.489.589-00"/>
+			</p:column>
+			
+			<p:column style="text-align: right; width: 80px">
+				<p:commandButton id="btnEditar" icon="ui-icon-pencil" title="Editar"/>
+				<p:commandButton id="btnExcluir" oncomplete="confirmacaoExclusaoClienteDlg.show()" icon="ui-icon-trash" title="Excluir"/>
+			</p:column>
+		</p:dataTable>
+		
+		<p:confirmDialog widgetVar="confirmacaoExclusaoClienteDlg" header="Confirmação de exclusão de cliente"
+			message="Deseja excluir o cliente selecionado?">
+			<p:button value="Não" onclick="confirmacaoExclusaoClienteDlg.hide(); return false;"/>
+			<p:commandButton value="Sim" oncomplete="confirmacaoExclusaoClienteDlg.hide()"/>
+		</p:confirmDialog>
+	</ui:define>
+</ui:composition>

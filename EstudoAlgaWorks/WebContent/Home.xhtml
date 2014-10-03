@@ -1,0 +1,17 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<f:metadata>
+		<f:event listener="#{graficoPedidoCriadosBean.preRender}" type="preRenderView"></f:event>
+	</f:metadata>
+	
+	<ui:define name="titulo">Pagina Inicial do Sistema</ui:define>
+	
+	<ui:define name="corpo">
+		<p:lineChart value="#{graficoPedidoCriadosBean.model}" title="Pedidos criados" style="height: 400px" animate="true" minY="0" legendPosition="e"/>
+	</ui:define>
+</ui:composition>

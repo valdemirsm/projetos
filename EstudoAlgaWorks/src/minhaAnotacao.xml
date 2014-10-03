@@ -1,0 +1,110 @@
+<!-- 
+Para gerar o arquivo de log dentro da pasta logs do apache tomcat precisa fazer as seguintes 
+configurações.
+	- Criar o arquivo log4j.xml dentro da raiz src.
+	- Criar os arquivos arquivos FacesUtil.java, JsfExceptionHandler.java e JsfExceptionHandlerFactory.java,
+	  sendo que a configuração necessária para gerar o log fica no segundo arquivo, os outros são
+	  artefatos para geração do log.
+	- Configurar dentro faces-config.xml.
+	- É necessário adicionar nas libs os jar commins-logging-1.13.jar e log4j.jar. Sendo que o primeiro
+	é especificação (interface) e o segundo é a implementação.
+********************************************************************
+Para configurar o CDI.
+	- Adicionar na lib o jar de implementação da especificação CDI weld-servlet.jar.
+	- Adicionar na raiz WEB-INF o arquivo vazio beans.xml
+	- Adicionar na raiz META-INF o arquivo context.xml
+	- Adicionar as configurações necessárias no arquivo web.xml	
+********************************************************************
+Para configuram o BenValidator, para que aparecessa as mensagem de validação na tela, de acordo com
+as anotações como @NotBlank, @NotNull. 
+	- É necessário que adicione a lib validation-api-1.1.0.Final.jar
+	- Configurar no faces-config.xml o <default-locale> como português para que as mensagens que aparecem
+	na tela seja em portugues.
+	- Criao o arquivo Messages.properties, tendo nesse arquivo o paramentro 
+	javax.faces.validator.BeanValidator.MESSAGE={1} {0}, o 1 representa o nome do campo que consta a 
+	mensagem e 0 representa o texto da mensagem, agora já em portugues.
+	- Para personalizar as mensagens é só criar o arquivo na raiz chamado ValidationMessages.properties.
+	As chaves que estão dentro desse aquivo é encontrato dentro do java hibernate-validation-5.1.0.Final.jar,
+	no seguinte destino org.hibernate.validator.
+	- Caso queira que um atributo na entidade tenha uma mensagem especifica, é só colocar 
+	@NotNull(message="é obrigatório")
+	@Max(value=999, message="tem um valor muito auto")
+	- Foi criado uma anotação @SKU e colocado na entidade produto
+	
+*************************************************************************
+
+Dentro de uma classe Converter do jsf não é permitido usando Injecao, para que possa ser 
+usado, teve que criar a classe br.com.valdemir.util.cdi.CDIServiceLocator, como exemplo
+a classe CategoriaConverter.java.
+
+************************************************************************
+
+Detro da classe FacesUtil, metodo isPostback retorna verdadeiro se for após a primeira
+requisição do jsf, ou seja no carregamentro da pagina é false. Utilizado quando temos um
+bean com sessionScope e não queremos que uma determanida rotinha seja executa em todas
+requisição, como por exemplo o preenchimento de um compo, só precisa ser carregado na 
+primeira requisição.
+
+************************************************************************
+
+Criado o interceptador de transação, agora dentro das classes services, no metodo que necessecite
+de uma transação só basta anotar o método como @Transactional, com isso antes de iniciar 
+o método é iniciado uma transação e quando finalizado o metodo é finalizado a transação,
+isso é necessário, caso queira ,manupular os dados em varias tabela não precisa iniciar uma transação
+para cada caso, é só analotar no método. Foi criado a anotação 
+br.com.valdemir.util.jpa.Transactional e o interceptador dessa anotação, classe resposavel por
+criar a transação.
+br.com.valdemir.util.jpa.TransactionInterceptor
+
+***************************************************************************
+
+Foi baixado a biblioteca implementação jsf omnifaces, usando o componente o:viewParam,
+isso foi necessário porque quando se usa o proprio componente do jsf f:viewParam, o jsf da
+varios set no atributo do controler.
+
+*************************************************************************
+
+Criado a clase AppContextListener, essa classe é chamada automaticamento ao iniciar o
+servidor. É setado dentro uma propriedade do toncat. Por padrão do jsf, caso em uma pagina 
+tenha um mapeamento de um atributo do bean e este seja to tipo long ou inteiro, ao ser feito
+uma requisição no servidor e esse campo esteja nulo, o jsf coloca zero. Essa propriedade setado
+dentro da classe é para que isso não aconteça, com isso a requisição já chega no managed bean com
+valor nulo, e também no response não vai mais ficar aparecendo o valor 0.
+ 
+ ***************************************************************************
+ 
+ Foi adicionado duas bibliotecas para trabalhar com envio de email commons-email.1.3.2.jar
+ e javax.mail.jar
+ 
+ *********************************************************************
+ 
+ Não utilizei, mas é bastante interessante a biblioteca Apache Velocity, utilizada para criar 
+ templates em html para envio de email.
+ 
+ ***************************************************************************
+ 
+ Quando se cria um servidor de envio de email, não é recomentado usar como por exempo o smtp.gmail.com.
+ Deve se contratar alguma empresa que fornece serviço proficional de envido de email pago ou
+ gratuito, como por exempo http://sendgrid.com/, http://aws.amazon.com/pt/s3/ e http://mandrill.com/
+ 
+ **************************************************************************
+ 
+ Para configuração do spring security, temos que configurar web.xml, criar o arquivo applicationContext.xml,
+ Configurar o j_spring_security_logout no arquivo LayoutPadrao.xhtml.
+ 
+ lista de bibliotecas usadas:
+ "WebContent/WEB-INF/lib/spring-aop-3.0.7.RELEASE.jar"
+ "WebContent/WEB-INF/lib/spring-asm-3.0.7.RELEASE.jar"
+ "WebContent/WEB-INF/lib/spring-beans-3.0.7.RELEASE.jar"
+ "WebContent/WEB-INF/lib/spring-context-3.0.7.RELEASE.jar"
+ "WebContent/WEB-INF/lib/spring-core-3.0.7.RELEASE.jar"
+ "WebContent/WEB-INF/lib/spring-expression-3.0.7.RELEASE.jar"
+ "WebContent/WEB-INF/lib/spring-jdbc-3.0.7.RELEASE.jar"
+ "WebContent/WEB-INF/lib/spring-security-config-3.1.4.RELEASE.jar"
+ "WebContent/WEB-INF/lib/spring-security-core-3.1.4.RELEASE.jar"
+ "WebContent/WEB-INF/lib/spring-security-web-3.1.4.RELEASE.jar"
+ "WebContent/WEB-INF/lib/spring-tx-3.0.7.RELEASE.jar"
+ "WebContent/WEB-INF/lib/spring-web-3.0.7.RELEASE.jar"
+ "WebContent/WEB-INF/lib/aopalliance-1.0.jar"
+ -->
+ 

@@ -1,0 +1,41 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+	<ui:define name="titulo">#{cadastroUsuarioBean.editando ? 'Edição de Usuário' : 'Novo Usuário'}</ui:define>
+
+	<ui:define name="corpo">
+		<f:metadata>
+			<o:viewParam name="p_usuario" value="#{cadastroUsuarioBean.usuario}"/>
+		</f:metadata>
+		<h:form>
+			<h1>#{cadastroUsuarioBean.editando ? 'Edição de Usuário' : 'Novo Usuário'}</h1>
+			<p:messages autoUpdate="true" closable="true"/>
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/usuario/CadastroUsuario" />
+					<p:commandButton id="btnSalvar" value="Salvar" action="#{cadastroUsuarioBean.salvar}" update="@form"/>
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisar" outcome="/usuario/PesquisaUsuario" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid id="panel" columns="2"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="60"
+					value="#{cadastroUsuarioBean.usuario.nome}" />
+
+				<p:outputLabel value="E-mail" for="email" />
+				<p:inputText id="email" size="45" value="#{cadastroUsuarioBean.usuario.email}"/>
+
+				<p:outputLabel value="Senha" for="senha" />
+				<p:password id="senha" size="20" maxlength="20" value="#{cadastroUsuarioBean.usuario.senha}" />
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

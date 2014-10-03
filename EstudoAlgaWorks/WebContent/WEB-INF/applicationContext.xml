@@ -1,0 +1,34 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+    
+    <beans:bean id="appUserDetailsService" class="br.com.valdemir.security.AppUserDetailService"/>
+    <http pattern="/Login.xhtml" security="none"/> <!-- essa pagina pode ser acessada sem segurança -->
+    <http pattern="/Erro.xhtml" security="none"/>
+    <http pattern="/javax.faces.resource/**" security="none"/>
+<!--     auto-config como true ja configura automaticamente uma pagina de login        -->
+	<http auto-config="false" use-expressions="true">
+		<intercept-url pattern="/Home.xhtml" access="isAuthenticated()" /> <!--todos terão acesso -->
+ 		<intercept-url pattern="/pedido/**" access="hasAnyRole('VENDEDORES', 'AUXILIARES', 'ADMINISTRADORES')" />
+ 		<intercept-url pattern="/produto/**" access="hasAnyRole('ADMINISTRADORES')" />
+ 		<intercept-url pattern="/usuario/**" access="hasAnyRole('ADMINISTRADORES')" />
+ 		<intercept-url pattern="/cliente/**" access="hasAnyRole('ADMINISTRADORES', 'VENDEDORES')" />
+ 		<intercept-url pattern="/**" access="denyAll" /> <!--bloqueia todas as paginas -->
+<!--  		default-target-url segnifica que apos o login sera redirecionado para a raiz, pagina inicial do sistema -->
+<!-- 		always-use-default-target como true sempre redireciona para a pagina raiz -->
+		<form-login login-page="/Login.xhtml" authentication-failure-url="/Login.xhtml?invalid=true" default-target-url="/" always-use-default-target="true"/>
+<!-- 		invalidate-session="true" sempre que fizer o logout apaga todos os objetos da sessão. -->
+		<logout logout-url="/j_spring_security_logout" invalidate-session="true"/>
+	</http>
+
+	<authentication-manager>
+		<authentication-provider user-service-ref="appUserDetailsService">
+<!--  			<password-encoder hash="md5"/> se a senha estivesse gravado em md5 -->
+		</authentication-provider>
+	</authentication-manager>
+           
+</beans:beans>

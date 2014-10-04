@@ -3,7 +3,8 @@ package br.com.valdemir.controller;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
@@ -26,7 +27,7 @@ import br.com.valdemir.util.jsf.FacesUtil;
 import br.com.valdemir.validation.SKU;
 
 @Named
-@SessionScoped
+@ConversationScoped
 public class CadastroPedidoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -39,6 +40,8 @@ public class CadastroPedidoBean implements Serializable {
 	private ProdutoRepository produtoRepository;
 	@Inject
 	private PedidoService pedidoService;
+	@Inject
+	private Conversation conversation;
 	@Produces
 	@PedidoEmissao
 	private Pedido pedido;
@@ -47,11 +50,12 @@ public class CadastroPedidoBean implements Serializable {
 	private String sku;
 
 	public CadastroPedidoBean() {
+		
 		limpar();
 	}
-
 	public void inicializar() {
 		if (FacesUtil.isNotPostback()) {
+			conversation.begin();
 			this.vendedores = this.usuarioRepository.vendedores();
 			this.pedido.adicionarItemVazio();
 			this.recalcularPedido();
@@ -66,7 +70,8 @@ public class CadastroPedidoBean implements Serializable {
 	public List<Cliente> completarCliente(String nome) {
 		return clienteRepository.porNome(nome);
 	}
-
+	
+	
 	public void salvar() {
 		this.pedido.removerItemVazio();
 		try

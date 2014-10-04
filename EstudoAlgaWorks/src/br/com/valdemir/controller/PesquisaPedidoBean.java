@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -15,7 +14,7 @@ import br.com.valdemir.repository.PedidoRepository;
 import br.com.valdemir.repository.filter.PedidoFilter;
 
 @Named
-@SessionScoped
+@RequestScoped
 public class PesquisaPedidoBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

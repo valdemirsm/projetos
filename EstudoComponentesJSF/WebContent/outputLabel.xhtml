@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+<!-- esse componente é mais completo, melhor que o outputText, pq esse tem o atributo for, permite seta o foco em outro componente -->
+<!-- ao ser clicado, possui conversores assim como o outputText. -->
+</h:head> 
+<body> 
+	<h:form id="form">
+		<h:outputLabel value="#{managedBean.valor}" for="campo">
+			<f:convertNumber type="currency"/>
+		</h:outputLabel>
+		
+		<h:inputText id="campo" value="#{managedBean.valor}" styleClass="label"/>
+	</h:form>
+</body> 
+</html>

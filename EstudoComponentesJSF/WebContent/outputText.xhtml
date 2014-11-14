@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+<!--  motivo para usarmos o h:outputText é a possibilidade de usá-lo em -->
+<!-- conjunto com conversores. -->
+<!-- Usando esse conversor, baseado na configuração do seu browser, o JSF irá apresentar o número armazenado na propriedade preco em Reais ou, dependendo da -->
+<!-- localização, poderia apresentar em Dólares. Por exemplo, o Float 1000000.0 -->
+<!-- seria apresentado assim: “R$ 1.000.000,00” -->
+</h:head> 
+<body> 
+	<h:form id="form">
+		<h:outputText value="#{managedBean.valor}">
+			<f:convertNumber type="currency"/>
+		</h:outputText>
+	</h:form>
+</body> 
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+<!-- Permite passar parametros para o label. -->
+</h:head> 
+<body> 
+	<h:form id="form">
+		<h:outputFormat value="Eu moro em {0}, {1}">
+			<f:param value="Rondonópolis"/>
+			<f:param value="Mato Grosso"/>
+		</h:outputFormat>
+	</h:form>
+</body> 
+</html>

@@ -1,7 +1,20 @@
 @CHARSET "ISO-8859-1";
-body {color: red;}
 
-colunas {
-	color: gray;
-	font-size: 25pt;
+.colunas{
+	color: red;
+	font-size: 30pt;
+}
+
+.table-linha-par{
+	background-color:silver;
+	font-size: 10pt;
+}
+
+.table-linha-impar{
+	font-size: 10pt;
+}
+
+.headerDataTable{
+	font-size: 20pt;
+	background-color:gray;
 }

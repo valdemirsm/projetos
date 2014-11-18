@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+<!-- A tag ui:repeat também é usada para iterar elementos,mas em vez de renderizar -->
+<!-- uma tabela, ela simplesmente percorre a lista, deixando-nos livres para escolher -->
+<!-- o tipo de saída que desejamos. -->
+<!-- Além das tradicionais propriedades value e var que funcionam igual as da -->
+<!-- h:dataTable, a ui:repeat nos permite, com a propriedade varStatus, definir -->
+<!-- uma variável relacionada ao status da iteração. No nosso exemplo, definimos -->
+<!-- a variável status, e através dela podemos fazer, dentre outras coisas, as seguintes -->
+<!-- checagens: -->
+<!-- • #{status.first}: é booleano e indica se é o primeiro elemento da lista; -->
+<!-- • #{status.last}: é booleano e indica se é o último elemento da lista; -->
+<!-- • #{status.index}: do tipo inteiro que representa o índice da iteração. Se -->
+<!-- fosse um for tradicional, seria o int i; -->
+<!-- • #{status.even}: é booleano e indica se o index é par; -->
+<!-- • #{status.odd}: é booleano e indica se o index é impar. -->
+<!-- Para utilizar essa tag, é necessário importar os componentes disponíveis do Facelets. -->
+<!-- Para isso, é só adicionar no começo do seu xhtml o seguinte: -->
+<!-- <html xmlns="http://www.w3.org/1999/xhtml" -->
+<!-- xmlns:h="http://java.sun.com/jsf/html" -->
+<!-- xmlns:f="http://java.sun.com/jsf/core" -->
+<!-- xmlns:ui="http://java.sun.com/jsf/facelets"> -->
+<!-- </html> -->
+	<h:outputStylesheet library="css" name="estilos.css"/>
+</h:head> 
+<body> 
+	<h:form id="form">
+		<ui:repeat var="item" value="#{managedBean.lista}" varStatus="id">
+			<h:outputLabel value="#{item.descricao}" />
+			<h:inputText id="id_#{item.id}" value="#{managedBean.inputHidden}" />
+			<h:outputLabel value="#{id.last}" />
+		</ui:repeat>
+	</h:form>
+</body> 
+</html>

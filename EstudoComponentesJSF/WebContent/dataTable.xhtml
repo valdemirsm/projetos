@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+	<h:outputStylesheet library="css" name="estilos.css"/>
+</h:head> 
+<body> 
+	<h:form id="form">
+		<h:dataTable value="#{managedBean.lista}"  var="item" width="100%" border="1"
+		rowClasses="table-linha-par,table-linha-impar" headerClass="headerDataTable">
+			<f:facet name="header">Lista de clientesd</f:facet>	
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputLabel value="#{item.id}" />			
+			</h:column>	
+			
+			<h:column>
+				<f:facet name="header">Descrição</f:facet>
+				<h:outputLabel value="#{item.descricao}" />			
+			</h:column>	
+		</h:dataTable>
+	</h:form>
+</body> 
+</html>

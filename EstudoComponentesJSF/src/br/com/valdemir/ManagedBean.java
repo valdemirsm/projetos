@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.servlet.http.Part;
 
 import br.com.valdemir.model.ModelInputTextarea;
@@ -60,6 +63,26 @@ public class ManagedBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public String recebeViaAction()
+	{
+		System.out.println("Executado action");
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Executado action"));
+		return "";
+	}
+	
+	public void recebeViaActionListener(ActionEvent ev)
+	{
+		System.out.println("Executado actionListener "+ev.getComponent().getId());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Executado actionListener, tem acesso aos atributos do botão, o id do botão que clicou é: "+ev.getComponent().getId()));
+	}
+	
+	public String recebeObjetoViaActionListener(ModelLista obj)
+	{
+		System.out.println("recebido o objeto "+obj);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Objeto recebido com sucesso "+ obj));
+		return "";
 	}
 	
 	private String inputText;

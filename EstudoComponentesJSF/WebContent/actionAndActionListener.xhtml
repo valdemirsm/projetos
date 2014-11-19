@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+<!-- 7.33 A diferença entre Action e ActionListener -->
+
+<!-- Apesar de aparentemente parecidos, action e actionListener são conceitualmente -->
+<!-- bem diferentes. Enquanto o primeiro é usado para executar a lógica da -->
+<!-- aplicação, o segundo serve para observarmos eventos de tela. Seria como ficar escutando -->
+<!-- as ações do usuário, mas sem objetivo de negócio. -->
+<!-- Como está apresentado no código, um actionListener deve ser um método -->
+<!-- público e void do objeto #{automovelBean}, mas temos a opção de não termos -->
+<!-- nenhum parâmetro ou de receber um javax.faces.event.ActionEvent. Esse -->
+<!-- último caso geralmente émais interessante, porque a partir desse objeto temos acesso -->
+
+<!-- Ao executar a ação de salvar, a actionListener escreveria no console o id -->
+<!-- do componente, que no caso é botaoSalvar. Existe também uma outra forma de -->
+<!-- associar uma ActionListener com a ação, através da tag f:actionListener. -->
+
+<!-- Nesse caso, estamos vinculando nossa ação com classes que implementam a -->
+<!-- interface ActionListener. Uma mesma ação pode ter vários listeners, mas só -->
+<!-- conseguimos fazer isso com a tag f:actionListener, já que a propriedade -->
+<!-- actionListener do h:commandButton e h:commandLink só permite vincular -->
+<!-- um método. Se especificarmos mais de um listener, eles serão executados na -->
+<!-- ordem que informarmos. -->
+<!-- A seguir temos um exemplo de ActionListener. -->
+
+<!-- Note a possibilidade de abortarmos a execução da ação principal, -->
+<!-- que no caso é salvar o Automovel, bastando para isso lançarmos uma -->
+<!-- AbortProcessingException. Isso torna possível, por exemplo, verificar -->
+<!-- se o usuário tem ou não permissão para executar uma determinada operação. -->
+<!-- Agora depois de vermos as ActionListeners, podemos compreender melhor -->
+<!-- o funcionamento da tag f:setPropertyActionListener. Ela adiciona na -->
+<!-- nossa ação uma ActionListener que copia um objeto de um local ( value) para -->
+<!-- outro ( target). -->
+
+</h:head> 
+<body> 
+	<h:messages/>
+	<h:form id="form">
+		<h:commandLink value="EnviarViaAction" action="#{managedBean.recebeViaAction()}" />
+		<br/>
+		<h:commandLink id="idBtnEnviarViaActionListener" value="EnviarViaActionListener" actionListener="#{managedBean.recebeViaActionListener}" />
+		<br/>
+		
+		<h:dataTable value="#{managedBean.lista}" var="item">
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputLabel value="#{item.id}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Ação</f:facet>
+				<h:commandButton value="EnviaViaObjetoActionListener" action="#{managedBean.recebeObjetoViaActionListener(item)}">
+					<f:actionListener type="br.com.valdemir.util.InplementaActionListener"/>
+				</h:commandButton>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Ação2</f:facet>
+				<h:commandButton value="EnviaViaObjetoAction" action="#{managedBean.recebeObjetoViaActionListener(item)}"/>
+			</h:column>
+			
+		</h:dataTable>
+		
+	</h:form>
+</body> 
+</html>

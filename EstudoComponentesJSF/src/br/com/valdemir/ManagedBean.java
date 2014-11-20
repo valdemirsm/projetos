@@ -3,6 +3,7 @@ package br.com.valdemir;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -29,6 +30,7 @@ public class ManagedBean {
 	private Part uploadeFile;
 	private ModelLista modelLista;
 	private Double valor = 10.21;
+	private Date data;
 	
 	public ManagedBean() {
 		super();
@@ -83,6 +85,11 @@ public class ManagedBean {
 		System.out.println("recebido o objeto "+obj);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Objeto recebido com sucesso "+ obj));
 		return "";
+	}
+	
+	public void enviarData()
+	{
+		System.out.println(this.data);
 	}
 	
 	private String inputText;
@@ -175,5 +182,11 @@ public class ManagedBean {
 		this.valor = valor;
 	}
 
-	
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}	
 }

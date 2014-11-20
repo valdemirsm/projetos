@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<!-- 	Podemos informar a localidade. Deve ser uma instância de -->
+	<!-- java.util.Locale ou então uma String, como “ en” ou “ pt”. -->
+	<!-- Caso não informemos o locale, o JSF usará o devolvido por -->
+	<!-- FacesContext.getViewRoot().getLocale(), que, se não for alterado -->
+	<!-- de alguma forma, será a localidade padrão do sistema (browser) do usuário. -->
+	<!-- timeZone -->
+	<!-- Uma característica do JSF que não agrada muito com relação ao -->
+	<!-- f:convertDateTime é que ele usa o time zone GMT por padrão, e não o -->
+	<!-- horário do sistema. Para mudar isso teríamos que informar timeZone="GMT-3", -->
+	<!-- no caso do horário oficial do Brasil, mas aí teríamos algo fixo. Para resolver esse -->
+	<!-- problema podemos colocar o seguinte parâmetro no web.xml. -->
+	<!-- <context-param> -->
+	<!-- <param-name> -->
+	<!-- javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE -->
+	<!-- </param-name> -->
+	<!-- <param-value>true</param-value> -->
+	<!-- </context-param> -->
+	<!-- Com isso, em vez do converter usar por padrão o time zone GMT, será usado o -->
+	<!-- do sistema. -->
+</h:head>
+<body>
+	<h:form id="form">
+		<h:panelGrid columns="2">
+		<h:outputLabel value="Data no formato dd/MM/yyyy" />
+		<h:inputText value="#{managedBean.data}">
+
+			<f:convertDateTime pattern="dd/MM/yyyy" />
+		</h:inputText>
+		
+		<h:commandButton value="Enviar" action="#{managedBean.enviarData}" />
+		<h:outputLabel value=""/>
+		
+		<h:outputLabel value="f:convertDateTime dateStyle=medium"/>
+		<h:outputLabel value="#{managedBean.data}">
+			<f:convertDateTime dateStyle="default"/>
+		</h:outputLabel>
+		
+		<h:outputLabel value="f:convertDateTime dateStyle=short"/>
+		<h:outputLabel value="#{managedBean.data}">
+			<f:convertDateTime dateStyle="short"/>
+		</h:outputLabel>
+		
+		<h:outputLabel value="f:convertDateTime dateStyle=medium"/>
+		<h:outputLabel value="#{managedBean.data}">
+			<f:convertDateTime dateStyle="medium"/>
+		</h:outputLabel>
+		
+		<h:outputLabel value="f:convertDateTime dateStyle=long"/>
+		<h:outputLabel value="#{managedBean.data}">
+			<f:convertDateTime dateStyle="long"/>
+		</h:outputLabel>
+		
+		<h:outputLabel value="f:convertDateTime dateStyle=full"/>
+		<h:outputLabel value="#{managedBean.data}">
+			<f:convertDateTime dateStyle="full"/>
+		</h:outputLabel>
+		
+		<h:outputLabel value="f:convertDateTime type=both"/>
+		<h:outputLabel value="#{managedBean.data}">
+			<f:convertDateTime type="both"/>
+		</h:outputLabel>
+		
+		<h:outputLabel value="f:convertDateTime type=time"/>
+		<h:outputLabel value="#{managedBean.data}">
+			<f:convertDateTime type="time"/>
+		</h:outputLabel>
+		
+		<h:outputLabel value="f:convertDateTime type=time"/>
+		<h:outputLabel value="#{managedBean.data}">
+			<f:convertDateTime type="time"/>
+		</h:outputLabel>
+	</h:panelGrid>
+	</h:form>
+</body>
+</html>

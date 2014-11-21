@@ -7,10 +7,11 @@
 <h:head></h:head> 
 <body> 
 	<h:form id="form">
-		<h:selectOneMenu value="#{managedBean.valorSelecionadoOneMenu}">
+		<h:selectOneMenu value="#{managedBean.modelLista}" converter="converterModel">
 			<f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
-			<f:selectItems value="#{managedBean.lista}" var="l" itemLabel="#{l.descricao}" itemValue="#{l.id}"/>
+			<f:selectItems value="#{managedBean.lista}" var="l" itemLabel="#{l.descricao}" itemValue="#{l}"/>
 		</h:selectOneMenu>
+		<h:commandButton value="enviar" action="#{managedBean.enviarData()}" />
 	</h:form>
 </body> 
 </html>

@@ -2,6 +2,7 @@ package br.com.valdemir;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +32,8 @@ public class ManagedBean {
 	private ModelLista modelLista;
 	private Double valor = 10.21;
 	private Date data;
+	private Integer numeroIntgeiro;
+	private BigDecimal numeroDecimal;
 	
 	public ManagedBean() {
 		super();
@@ -41,19 +44,21 @@ public class ManagedBean {
 	{
 		modelInputTextarea = new ModelInputTextarea();
 		modelLista = new ModelLista();
-		listaSelectOneMenu();
+		lista = listaSelectOneMenu();
 	}
 	
-	private void listaSelectOneMenu()
+	public List<ModelLista> listaSelectOneMenu()
 	{
-		lista = new ArrayList<ModelLista>();
+		ArrayList<ModelLista> l = new ArrayList<ModelLista>();
 		for (int i = 0; i < 10; i++) 
 		{
 			ModelLista m = new ModelLista();
 			m.setId(i);
 			m.setDescricao("nome"+i);
-			lista.add(m);
+			l.add(m);
+			
 		}
+		return l;
 	}
 	
 	public void salvarImagem()
@@ -91,6 +96,7 @@ public class ManagedBean {
 	{
 		System.out.println(this.data);
 	}
+	
 	
 	private String inputText;
 
@@ -188,5 +194,23 @@ public class ManagedBean {
 
 	public void setData(Date data) {
 		this.data = data;
-	}	
+	}
+
+	public BigDecimal getNumeroDecimal() {
+		return numeroDecimal;
+	}
+
+	public void setNumeroDecimal(BigDecimal numeroDecimal) {
+		this.numeroDecimal = numeroDecimal;
+	}
+
+	public Integer getNumeroIntgeiro() {
+		return numeroIntgeiro;
+	}
+
+	public void setNumeroIntgeiro(Integer numeroIntgeiro) {
+		this.numeroIntgeiro = numeroIntgeiro;
+	}
+
+
 }

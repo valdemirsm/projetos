@@ -1,7 +1,5 @@
 package br.com.valdemir.util;
 
-import java.util.List;
-
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -10,7 +8,7 @@ import javax.faces.convert.FacesConverter;
 import br.com.valdemir.ManagedBean;
 import br.com.valdemir.model.ModelLista;
 
-@FacesConverter(value="converterModel")
+@FacesConverter(value="converterModel", forClass=ModelLista.class)
 public class ConverterModel implements Converter{
 
 	@Override

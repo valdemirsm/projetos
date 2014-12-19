@@ -92,9 +92,16 @@ public class ManagedBean {
 		return "";
 	}
 	
+	public String actionListenerSemParametro()
+	{
+		System.out.println("recebido o objeto "+modelLista.getDescricao());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Objeto recebido com sucesso "+ modelLista.getDescricao()));
+		return "";
+	}
+	
 	public void enviarData()
 	{
-		System.out.println(this.data);
+		System.out.println(this.modelLista);
 	}
 	
 	

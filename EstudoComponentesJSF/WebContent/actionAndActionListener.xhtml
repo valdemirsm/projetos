@@ -62,6 +62,13 @@
 				<h:commandButton value="EnviaViaObjetoAction" action="#{managedBean.recebeObjetoViaActionListener(item)}"/>
 			</h:column>
 			
+			<h:column>
+				<f:facet name="header">Ação3</f:facet>
+				<h:commandButton value="EnviaViaObjetoActionListener" action="#{managedBean.actionListenerSemParametro()}">
+					<f:setPropertyActionListener target="#{managedBean.modelLista}" value="#{item}" />
+				</h:commandButton>
+			</h:column>
+			
 		</h:dataTable>
 		
 	</h:form>

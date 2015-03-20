@@ -44,6 +44,12 @@ public class ModelLista implements Serializable{
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		if (this.id != null)
+			return this.id.toString();
+		return super.toString();
+	}
 	
 	
 }

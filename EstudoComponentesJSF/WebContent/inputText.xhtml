@@ -4,10 +4,39 @@
       xmlns:f="http://java.sun.com/jsf/core" 
       xmlns:ui="http://java.sun.com/jsf/facelets"> 
 
-<h:head></h:head> 
-<body> 
+<h:head>
+
+</h:head> 
+<body onload="validarCampos();"> 
+
+	<script type="text/javascript">
+	function validarCampos()
+	{
+		for (i=0; document.form.elements.length > i; i++){
+			if (document.form.elements[i].type=="select-one"){
+				if (document.createEvent) {
+
+					var clickEvent = document.createEvent('MouseEvents');
+					document.form.elements[i].focus();
+					alert('1');
+					clickEvent.initEvent("click", true, false); 
+					alert('2');
+					document.form.elements[i].dispatchEvent(clickEvent);
+					alert('3');
+				}
+				
+			}
+		}
+	}
+	</script>
 	<h:form id="form">
-		<h:inputText value="#{managedBean.inputText}" />
+		<h:inputText  value="#{managedBean.inputText}" />
+		
+		<h:selectOneMenu id="IDCOMBO" value="" onclick="">
+			<f:selectItem itemLabel="São Paulo" itemValue="SP"/>
+			<f:selectItem itemLabel="Mato Grosso" itemValue="MT"/>
+			<f:selectItem itemLabel="Rio de Janeiro" itemValue="RJ"/>
+		</h:selectOneMenu>
 	</h:form>
 </body> 
 </html>

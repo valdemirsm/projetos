@@ -4,9 +4,29 @@
       xmlns:f="http://java.sun.com/jsf/core" 
       xmlns:ui="http://java.sun.com/jsf/facelets"> 
 
-<h:head></h:head> 
+<h:head>
+    <script type="text/javascript">
+        function InitClick (event) {
+                if (event.initMouseEvent) {     // all browsers except IE before version 9
+                    var clickEvent = document.createEvent ("MouseEvent");
+                    clickEvent.initMouseEvent ("click", true, true, window, 0, 
+                                                event.screenX, event.screenY, event.clientX, event.clientY, 
+                                                event.ctrlKey, event.altKey, event.shiftKey, event.metaKey, 
+                                                0, null);
+                    event.target.dispatchEvent (clickEvent);
+                } else {
+                    if (document.createEventObject) {   // IE before version 9
+                        var clickEvent = document.createEventObject (window.event);
+                        clickEvent.button = 1;  // left click
+                        event.srcElement.fireEvent ("onclick", clickEvent);
+                    }
+                }
+        }
+    </script>
+</h:head> 
 <body> 
 	<h:form id="form">
+	<input type="checkbox" onmouseover="InitClick (event);" onclick="alert ('click event occurred')"/>Hover over the check box!
 		<h:outputLabel value="Não mostra o campo" />
 		<h:inputHidden value="#{managedBean.inputHidden}" />
 	</h:form>

@@ -6,6 +6,7 @@
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
 
 <h:head></h:head> 
+<!-- retira os cochetes, exemplo '[1,2,3,4]' para '1,2,3,4' -->
 <body> 
 	<h:form id="form">
 		<h:outputText value="#{fn:replace(managedBean.lista,'^\\[|\\]$','')}" />

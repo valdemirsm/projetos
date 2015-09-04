@@ -10,9 +10,7 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 <body>
 	<h:form id="formulario" prependId="false">
 		<h:inputText value="#{managedBeanPessoa.pessoa.nome}" />
-		<h:commandButton
-			action="#{managedBeanPessoa.salvar(managedBeanPessoa.pessoa)}"
-			value="Salvar" />
+
 		<h:dataTable var="pessoa" value="#{managedBeanPessoa.consultarPessoa}">
 			<h:column>
 				#{pessoa.nome}

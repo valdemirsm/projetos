@@ -55,21 +55,6 @@ public class MainOneToMany {
 //		emf.close();
 		
 		
-//		EntityManagerFactory emf = Persistence.createEntityManagerFactory("DevmediaPersistenceUnit");
-//		EntityManager em = emf.createEntityManager();
-//		em.getTransaction().begin();
-//		
-//		Condominio condominio = em.find(Condominio.class, 1);
-//		System.out.println(condominio.getNome());
-//		
-//		CondominioCasa condominioCasa = new CondominioCasa();
-//		condominioCasa.setNome("casa01111gkkkgg");
-//		condominio.getCondominioCasas().add(condominioCasa);
-//		
-//		em.getTransaction().commit();
-//		em.close();
-//		emf.close();
-		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("DevmediaPersistenceUnit");
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -77,9 +62,32 @@ public class MainOneToMany {
 		Condominio condominio = em.find(Condominio.class, 1);
 		System.out.println(condominio.getNome());
 		
+		CondominioCasa condominioCasa = new CondominioCasa();
+		condominioCasa.setNome("casa01111gkkkgg");
+		condominioCasa.setCondominio(condominio);
+		condominio.getCondominioCasas().add(condominioCasa);
+		
+		for (CondominioCasa a : condominio.getCondominioCasas()) {
+			a.setNome("aaaaaahdddcchlaaa");
+		}
+		
+		em.merge(condominioCasa);
 
+		
+		em.getTransaction().commit();
 		em.close();
 		emf.close();
+		
+//		EntityManagerFactory emf = Persistence.createEntityManagerFactory("DevmediaPersistenceUnit");
+//		EntityManager em = emf.createEntityManager();
+//		em.getTransaction().begin();
+//		
+//		Condominio condominio = em.find(Condominio.class, 1);
+//		System.out.println(condominio.getNome());
+//		
+//
+//		em.close();
+//		emf.close();
 	}
 
 }

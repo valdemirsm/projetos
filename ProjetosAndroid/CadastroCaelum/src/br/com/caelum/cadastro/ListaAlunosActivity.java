@@ -1,28 +1,31 @@
 package br.com.caelum.cadastro;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import br.com.caelum.cadastro.dao.AlunoDAO;
-import br.com.caelum.cadastro.modelo.Aluno;
-
-import com.caelum.cadastrocaelum.R;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import br.com.caelum.cadastro.adapter.AlunoAdapter;
+import br.com.caelum.cadastro.converter.AlunoConverter;
+import br.com.caelum.cadastro.dao.AlunoDAO;
+import br.com.caelum.cadastro.modelo.Aluno;
+import br.com.caelum.cadastro.support.WebClient;
+import br.com.caelum.cadastro.task.EnviarContatosTask;
+
+import com.caelum.cadastrocaelum.R;
 
 public class ListaAlunosActivity extends Activity{
 	private ListView lista;
@@ -74,7 +77,10 @@ public class ListaAlunosActivity extends Activity{
 			Intent irParaFormulario = new Intent(this, FormularioActivity.class);
 			startActivity(irParaFormulario);
 			break;
-
+			
+		case R.id.menu_enviar_alunos:
+			new EnviarContatosTask(this).execute();
+			return false;
 		default:
 			break;
 		}
@@ -91,9 +97,9 @@ public class ListaAlunosActivity extends Activity{
 		AlunoDAO alunoDAO = new AlunoDAO(this);
 		List<Aluno> alunos = alunoDAO.getLista();
 	
-		ArrayAdapter<Aluno> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, alunos);
-		
-		lista.setAdapter(adapter);
+		AlunoAdapter alunoAdapter = new AlunoAdapter(alunos, this);
+
+		lista.setAdapter(alunoAdapter);
     }  
 	
 	@Override

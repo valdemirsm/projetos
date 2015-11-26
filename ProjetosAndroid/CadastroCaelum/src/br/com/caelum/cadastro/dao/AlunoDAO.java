@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class AlunoDAO extends SQLiteOpenHelper {
 
 	private static final String DATABASE = "CadastroCaelum";
-	private static final int VERSAO = 1;
+	private static final int VERSAO = 4;
 	private static final String TABELA = "Alunos";
 
 	public AlunoDAO(Context ctx) {
